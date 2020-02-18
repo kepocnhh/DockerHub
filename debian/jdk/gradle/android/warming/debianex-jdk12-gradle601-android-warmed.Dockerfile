@@ -11,3 +11,4 @@ RUN gradle -p warming clean assembleDebug
 RUN gradle -p warming clean compileReleaseSources
 RUN gradle -p warming clean assembleRelease
 RUN rm -rf warming
+RUN gradle --stop
