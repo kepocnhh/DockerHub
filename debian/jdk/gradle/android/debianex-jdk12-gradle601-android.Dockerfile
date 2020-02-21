@@ -6,10 +6,16 @@ RUN mkdir -p $ANDROID_HOME && mkdir -p $ANDROID_HOME/licenses
 RUN echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
 
 RUN list="23_r03 24_r02 25_r03 26_r02 27_r03 28_r06 29_r04" && \
+	mkdir -p $ANDROID_HOME/platforms && \
 	for v in $list; do \
 		echo "install platform $v..." && \
 		curl -s "http://dl.google.com/android/repository/platform-${v}.zip" -o "tmpfile" && \
-		unzip -q "tmpfile" -d $ANDROID_HOME/platforms && rm "tmpfile" && \
+		mkdir -p $ANDROID_HOME/tmp && \
+		unzip -q "tmpfile" -d $ANDROID_HOME/tmp && rm "tmpfile" && \
+		oldName=$(ls $ANDROID_HOME/tmp) && \
+		newName=$(echo $v | cut -d'_' -f1) && \
+		mv $ANDROID_HOME/tmp/$oldName $ANDROID_HOME/platforms/android-$newName && \
+		rm -rf $ANDROID_HOME/tmp && \
 		echo "install platform $v success"; \
 	done
 
