@@ -1,0 +1,16 @@
+FROM kepocnhh/deb-j12.0.2-g6.5-a-bt29.0.3:0.0.1
+
+# Android platforms
+RUN mkdir -p $ANDROID_SDK_ROOT/platforms
+ENV ANDROID_PLATFORM_VERSION_NAME=28
+ENV ANDROID_PLATFORM_VERSION_REVISION=06
+ENV ANDROID_PLATFORM_VERSION=${ANDROID_PLATFORM_VERSION_NAME}_r$ANDROID_PLATFORM_VERSION_REVISION
+
+RUN curl -s http://dl.google.com/android/repository/platform-$ANDROID_PLATFORM_VERSION.zip -o tmpfile
+RUN mkdir -p $ANDROID_SDK_ROOT/tmp
+RUN unzip -q tmpfile -d $ANDROID_SDK_ROOT/tmp
+RUN rm tmpfile
+RUN mv $ANDROID_SDK_ROOT/tmp/$(ls $ANDROID_SDK_ROOT/tmp) $ANDROID_SDK_ROOT/platforms/android-$ANDROID_PLATFORM_VERSION_NAME
+RUN rm -rf $ANDROID_SDK_ROOT/tmp
+
+RUN cat $ANDROID_SDK_ROOT/platforms/android-$ANDROID_PLATFORM_VERSION_NAME/source.properties
