@@ -1,18 +1,16 @@
-FROM debian:stable-20191224-slim
+from debian:stable-20210511-slim
 
-RUN apt-get update -qq
-ARG APT_GET_INSTALL="apt-get install -qq --no-install-recommends"
+run echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list
 
-RUN $APT_GET_INSTALL curl
-RUN curl --version
+run apt-get update && apt-get upgrade -y
 
-RUN $APT_GET_INSTALL unzip
+run apt-get install --no-install-recommends -y \
+ curl unzip
+run apt-get install --no-install-recommends -y \
+ openssl ca-certificates
 
-RUN $APT_GET_INSTALL openssl ca-certificates
-RUN openssl version -a
-RUN update-ca-certificates -f
+run update-ca-certificates -f
 
-RUN $APT_GET_INSTALL git
-RUN git --version
+run apt-get install --no-install-recommends -y git
 
-ENV SDK_HOME=/opt
+env SDK_HOME=/opt
