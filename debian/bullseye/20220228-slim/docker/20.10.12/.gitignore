@@ -1,0 +1,6 @@
+/*
+!.gitignore
+!dex-spock.docker
+!run_docker_daemon.sh
+!test.docker
+!test.sh

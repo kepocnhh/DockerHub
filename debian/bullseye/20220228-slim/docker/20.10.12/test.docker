@@ -1,0 +1,19 @@
+from kepocnhh/dex-spock:0.1
+
+arg EXPECTED
+env EXPECTED=$EXPECTED
+
+workdir /workspace
+
+run /bin/echo -e "\
+from kepocnhh/dex-kirk:0.1\n\
+arg EXPECTED\n\
+run echo \"\$EXPECTED\" > /tmp/result\
+" > internal.docker
+
+cmd /usr/local/bin/run_docker_daemon.sh \
+ && docker build -f internal.docker --build-arg EXPECTED=$EXPECTED -t dindi . \
+ && docker run --name dindc dindi \
+ && docker cp dindc:/tmp/result /tmp/result \
+ && docker stop dindc \
+ && docker rm -f dindc \
