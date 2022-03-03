@@ -1,0 +1,12 @@
+from kepocnhh/dex-uhura:1
+
+env ANDROID_BUILD_TOOLS_VERSION=32.0.0
+
+run curl http://dl.google.com/android/repository/build-tools_r32-linux.zip -o tmpfile && \
+ unzip tmpfile -d /tmp/build-tools/ && rm tmpfile && \
+ mkdir -p $ANDROID_SDK_ROOT/build-tools/${ANDROID_BUILD_TOOLS_VERSION} && \
+ mv /tmp/build-tools/android-12/* $ANDROID_SDK_ROOT/build-tools/${ANDROID_BUILD_TOOLS_VERSION}
+
+run cat $ANDROID_SDK_ROOT/build-tools/$ANDROID_BUILD_TOOLS_VERSION/source.properties
+
+run exit 0
