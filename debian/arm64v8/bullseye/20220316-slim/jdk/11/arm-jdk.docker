@@ -1,0 +1,9 @@
+from debian-arm:1
+
+env JDK_VERSION=11.0.14.1
+run curl https://cdn.azul.com/zulu-embedded/bin/zulu11.54.25-ca-jdk${JDK_VERSION}-linux_aarch64.tar.gz \
+ -o tmpfile && tar xf tmpfile -C /opt && rm tmpfile
+
+env JAVA_HOME=/opt/zulu11.54.25-ca-jdk${JDK_VERSION}-linux_aarch64
+env PATH=$JAVA_HOME/bin:$PATH
+run java --version
