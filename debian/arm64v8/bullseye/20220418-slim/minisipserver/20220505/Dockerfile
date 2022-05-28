@@ -1,5 +1,5 @@
-#from kepocnhh/debian-arm:2
-from kepocnhh/debian-amd64:1
+from kepocnhh/debian-arm:2
+#from kepocnhh/debian-amd64:1
 
 run apt-get install --no-install-recommends -y binutils
 run apt-get install --no-install-recommends -y xz-utils
