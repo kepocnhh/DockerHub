@@ -35,3 +35,6 @@ run mkdir /opt/yq-${YQ_VERSION} && \
   -o /opt/yq-${YQ_VERSION}/yq \
  && chmod +x /opt/yq-${YQ_VERSION}/yq \
  && yq --version
+
+run ln -s /bin/bash /usr/local/bin/bash \
+ && /usr/local/bin/bash --version
